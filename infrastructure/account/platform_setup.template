@@ -31,17 +31,17 @@
 	  "Default" : "opencdplatform.com"
 	},
 
-	"GithubUsername" : {
+	"BitbucketUsername" : {
 	  "Type" : "String",
 	  "Default" : "student29"
 	},
 
-	"GithubPassword" : {
+	"BitbucketPassword" : {
 	  "Type" : "String",
 	  "NoEcho" : "TRUE"
 	},
 
-	"GithubOrganization" : {
+	"BitbucketOrganization" : {
 	  "Type" : "String",
 	  "Default" : "OpenDelivery"
 	},
@@ -161,7 +161,9 @@
 			  "/root/.ssh/config" : {
 				"content" : { "Fn::Join" : ["", [
 				  "Host github.com\n",
-				  "StrictHostKeyChecking no\n"
+				  "StrictHostKeyChecking no\n",
+				  "Host bitbucket.org\n",
+          		  "StrictHostKeyChecking no\n"
                   ]]},
 				"mode"   : "000600",
                 "owner"  : "root",
@@ -201,21 +203,24 @@
 		  "yum -y install gcc\n",
 
 		  "# Get CD Platform Files\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/config/jenkins_backup.sh --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/config/server.xml --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/boot.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/stack_builder.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/database_export.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/s3_upload.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/create_domain.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/showback_domain.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/set_properties.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/add_github_key.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/check_github_repo.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/create_github_repo.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/lib/transient_environments.rb --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/infrastructure/account/platform_setup.template --no-check-certificate\n",
-		  "wget -P /tmp/ https://raw.github.com/stelligent/continuous_delivery_open_platform/master/infrastructure/jenkins/jenkins.template --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/config/jenkins_backup.sh --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/config/server.xml --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/boot.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/stack_builder.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/database_export.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/s3_upload.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/create_domain.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/showback_domain.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/set_properties.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/add_github_key.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/check_github_repo.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/create_github_repo.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/add_bitbucket_key.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/check_bitbucket_repo.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/create_bitbucket_repo.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/lib/transient_environments.rb --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/infrastructure/account/platform_setup.template --no-check-certificate\n",
+		  "wget -P /tmp/ https://raw.github.com/lapyu/continuous_delivery_open_platform/master/infrastructure/jenkins/jenkins.template --no-check-certificate\n",
 		  "wget -P /tmp/ https://s3.amazonaws.com/OpenDelivery/resources/rpm/ruby-1.9.3p0-2.amzn1.x86_64.rpm\n",
 		  "wget -P /tmp/ https://s3.amazonaws.com/OpenDelivery/resources/rpm/redis-2.6.2-1.el5.x86_64.rpm\n",
 
@@ -231,6 +236,7 @@
 		  "gem install aws-sdk     --version 1.5.6    --no-rdoc --no-ri\n",
 		  "gem install bigdecimal  --version 1.1.0    --no-rdoc --no-ri\n",
 		  "gem install github_api  --version 0.7.0    --no-rdoc --no-ri\n",
+		  "gem install bitbucket_rest_api   --version 0.1.2    --no-rdoc --no-ri\n",
 
 		  "# Create Simple DB Domain\n",
 		  "ruby /tmp/create_domain.rb --sdbdomain ", { "Ref" : "AWS::StackName" }, "\n",
@@ -245,33 +251,35 @@
 		  "ruby /tmp/set_properties.rb --sdbdomain ", { "Ref" : "AWS::StackName" }, " --itemname properties --property GROUP --value ", { "Ref" : "Group" }, "\n",
 
 		  "# Setup Git Repository\n",
-		  "ruby /tmp/add_github_key.rb  --publicKey /root/.ssh/id_rsa.pub --user ", { "Ref" : "GithubUsername" }, " --pass ", { "Ref" : "GithubPassword" }, "\n",
+		  "echo \"machine bitbucket.org\" > /root/.netrc\n",
+		  "echo \"  login ", { "Ref" : "BitbucketUsername" }, "\" >> /root/.netrc\n",
+		  "echo \"  password ", { "Ref" : "BitbucketPassword" }, "\" >> /root/.netrc\n",
 
 		  "# Clone Github Repository\n",
-		  "git clone git@github.com:stelligent/continuous_delivery_open_platform.git /tmp/platform\n",
-		  "git clone git@github.com:stelligent/continuous_delivery_open_platform_jenkins_configuration.git /tmp/jenkins\n",
+		  "git clone https://github.com/lapyu/continuous_delivery_open_platform.git /tmp/platform\n",
+		  "git clone https://github.com/lapyu/continuous_delivery_open_platform_jenkins_configuration.git /tmp/jenkins\n",
 
-		  "platform=`ruby /tmp/check_github_repo.rb --user ", { "Ref" : "GithubUsername" }, " --pass ", { "Ref" : "GithubPassword" }, " --organization ", { "Ref" : "GithubOrganization" }, " --repo ", { "Ref" : "ProjectName" }, "_platform`\n",
+		  "platform=`ruby /tmp/check_bitbucket_repo.rb --user ", { "Ref" : "BitbucketUsername" }, " --pass ", { "Ref" : "BitbucketPassword" }, " --repo ", { "Ref" : "ProjectName" }, "_platform`\n",
 		  "if [  \"$platform\" == \"false\" ]; then\n",
-		    "ruby /tmp/create_github_repo.rb --user ", { "Ref" : "GithubUsername" }, " --pass ", { "Ref" : "GithubPassword" }, " --project ", { "Ref" : "ProjectName" }, " --organization ", { "Ref" : "GithubOrganization" }, " --extension _platform\n",
+		    "ruby /tmp/create_bitbucket_repo.rb --user ", { "Ref" : "BitbucketUsername" }, " --pass ", { "Ref" : "BitbucketPassword" }, " --owner ", { "Ref" : "BitbucketOrganization" }, " --project ", { "Ref" : "ProjectName" }, " --extension _platform\n",
 		    "cd /tmp/platform\n",
 		    "rm -rf .git\n",
 		    "git init\n",
 		    "git add .\n",
 		    "git commit -m \"First commit\"\n",
-		    "git remote add origin git@github.com:", { "Ref" : "GithubOrganization" }, "/", { "Ref" : "ProjectName" }, "_platform.git\n",
+		    "git remote add origin https://", { "Ref" : "BitbucketUsername" }, "@bitbucket.org/", { "Ref" : "BitbucketOrganization" }, "/", { "Ref" : "ProjectName" }, "_platform.git\n",
 		    "git push -u origin master\n",
 		  "fi\n",
 
-		  "jenkins=`ruby /tmp/check_github_repo.rb --user ", { "Ref" : "GithubUsername" }, " --pass ", { "Ref" : "GithubPassword" }, " --organization ", { "Ref" : "GithubOrganization" }, " --repo ", { "Ref" : "ProjectName" }, "_jenkins`\n",
+		  "jenkins=`ruby /tmp/check_bitbucket_repo.rb --user ", { "Ref" : "BitbucketUsername" }, " --pass ", { "Ref" : "BitbucketPassword" }, " --repo ", { "Ref" : "ProjectName" }, "_jenkins`\n",
 		  "if [  \"$jenkins\" == \"false\" ]; then\n",
-		    "ruby /tmp/create_github_repo.rb --user ", { "Ref" : "GithubUsername" }, " --pass ", { "Ref" : "GithubPassword" }, " --project ", { "Ref" : "ProjectName" }, " --organization ", { "Ref" : "GithubOrganization" }, " --extension _jenkins\n",
+		    "ruby /tmp/create_bitbucket_repo.rb --user ", { "Ref" : "BitbucketUsername" }, " --pass ", { "Ref" : "BitbucketPassword" }, " --owner ", { "Ref" : "BitbucketOrganization" }, " --project ", { "Ref" : "ProjectName" }, " --extension _jenkins\n",
 		    "cd /tmp/jenkins\n",
 		    "rm -rf .git\n",
 		    "git init\n",
 		    "git add .\n",
 		    "git commit -m \"First commit\"\n",
-		    "git remote add origin git@github.com:", { "Ref" : "GithubOrganization" }, "/", { "Ref" : "ProjectName" }, "_jenkins.git\n",
+		    "git remote add origin https://", { "Ref" : "BitbucketUsername" }, "@bitbucket.org/", { "Ref" : "BitbucketOrganization" }, "/", { "Ref" : "ProjectName" }, "_jenkins.git\n",
 		    "git push -u origin master\n",
 		  "fi\n",
 
@@ -324,27 +332,6 @@
 		"EIP" : { "Ref" : "IPAddress" }
 	  }
 	},
-
-        "JenkinsStack" : {
-          "Type" : "AWS::CloudFormation::Stack",
-          "DependsOn" : "WaitCondition",
-          "Properties" : {
-            "TemplateURL" : { "Fn::Join" : ["", ["https://s3.amazonaws.com/", { "Ref" : "Bucket" }, "/templates/jenkins.template"]]},
-            "TimeoutInMinutes" : "20",
-            "Parameters" : {
-               "Group" : { "Ref" : "Group" },
-               "S3Bucket" : { "Ref" : "Bucket"},
-               "HostedZone" : { "Ref" : "HostedZone" },
-               "ApplicationName" : { "Ref" : "ApplicationName" },
-               "KeyName" : { "Ref" : "KeyName" },
-               "InstanceType" : "m1.small",
-               "Email" : { "Ref" : "Email" },
-               "SetupTemplate" : { "Ref" : "AWS::StackName" },
-               "GithubOrganization" : { "Ref" : "GithubOrganization" },
-               "ProjectName": { "Ref" : "ProjectName" }
-            }
-          }
-        },
 
 	"WaitHandle" : {
       "Type" : "AWS::CloudFormation::WaitConditionHandle"
