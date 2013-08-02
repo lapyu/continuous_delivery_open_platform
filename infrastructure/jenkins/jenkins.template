@@ -28,6 +28,10 @@
     "Type" : "String"
   },
 
+  "BitbucketUsername" : {
+    "Type" : "String"
+  },
+
   "BitbucketOrganization" : {
     "Type" : "String"
   },
